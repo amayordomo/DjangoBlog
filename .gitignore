@@ -1,0 +1,83 @@
+# Python bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+env/
+ENV/
+venv.bak/
+venv.bak.tar.gz
+venv.bak.zip
+
+# Django stuff:
+*.log
+*.pot
+*.pyc
+*.mo
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Inore the database file
+*.sqlite3
+
+# Media and static files (adjust if necessary)
+media/
+staticfiles/
+static/
+
+# Secrets
+*.env
+
+# Ignore IDE and editor specific files
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# Ignore Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# Ignore all node_modules directories if you're using Node.js
+node_modules/
+
+# Ignore coverage reports
+htmlcov/
+.coverage
+.tox/
+.cache/
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+
+# If you're using MacOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Thumbnails
+._*
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# Other
+*.log
