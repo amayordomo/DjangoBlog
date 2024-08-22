@@ -4,6 +4,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
 from django.shortcuts import HttpResponseRedirect
 from django.urls import reverse
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def signup(request):
@@ -17,10 +18,10 @@ def signup(request):
             registered = True
 
     context = {'form' : form, 'registered' : registered}
-    return render(request, 'App_Login/signup.html', context)
+    return render(request, 'App_Login/signup.html', context=context)
 
 
-def login(request):
+def login_user(request):
     form = AuthenticationForm()
     context = {'form' : form}
 
@@ -34,5 +35,11 @@ def login(request):
                 login(request, user)
                 return HttpResponseRedirect(reverse('index'))
 
-    return render(request, 'App_Login/login.html', context)
+    return render(request, 'App_Login/login.html', context=context)
+
+@login_required
+def logout_user(request):
+    logout(request=request)
+    return HttpResponseRedirect(reverse('App_Login:login'))
+
 
