@@ -31,10 +31,15 @@ def login_user(request):
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
             user = authenticate(username=username, password=password)
-            if username is not None:
+            if user is None:
                 login(request, user)
                 return HttpResponseRedirect(reverse('index'))
+            else:
+                # If authentication fails, re-render the form with an error message
+                context['form'] = form
+                context['form'].add_error(None, 'Invalid username or password.')
 
+    context['form'] = form 
     return render(request, 'App_Login/login.html', context=context)
 
 @login_required
