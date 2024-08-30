@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .forms import CustomUserCreationForm
+from .forms import CustomUserCreationForm, CustomUserChangeProfile
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
 from django.shortcuts import HttpResponseRedirect
@@ -49,3 +49,17 @@ def logout_user(request):
 def profile(request):
     context = {}
     return render(request, 'App_Login/profile.html', context=context)
+
+@login_required
+def change_profile(request):
+    current_user = request.user
+    form = CustomUserChangeProfile(instance=current_user)
+
+    if request.method == 'POST':
+        form = CustomUserChangeProfile(request.POST, instance=current_user)
+        if form.is_valid():
+            form.save()
+            form = CustomUserChangeProfile(instance=current_user)
+            return HttpResponseRedirect(reverse('App_Login:profile')) # Redirect to the profile page
+    
+    return render(request, 'App_Login/change_profile.html', context={"form" : form})
