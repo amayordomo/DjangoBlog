@@ -26,3 +26,10 @@ class CustomUserChangeProfile(UserChangeForm):
     class Meta(UserCreationForm.Meta):
         model = User
         fields = ('username', 'email', 'first_name', 'last_name', 'password')  # Only include these fields
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        # Remove help text from fields
+        self.fields['username'].help_text = None
+        self.fields['password'].help_text = None
