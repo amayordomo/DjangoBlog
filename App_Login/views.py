@@ -1,10 +1,11 @@
 from django.shortcuts import render
 from .forms import CustomUserCreationForm, CustomUserChangeProfile
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.contrib.auth import login, authenticate, logout
 from django.shortcuts import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 def signup(request):
     form = CustomUserCreationForm() 
@@ -60,6 +61,20 @@ def change_profile(request):
         if form.is_valid():
             form.save()
             form = CustomUserChangeProfile(instance=current_user)
-            return HttpResponseRedirect(reverse('App_Login:profile')) # Redirect to the profile page
+            messages.success(request, 'Profile changes successfully saved!')
     
     return render(request, 'App_Login/change_profile.html', context={"form" : form})
+
+@login_required
+def change_password(request):
+    current_user = request.user
+    form = PasswordChangeForm(current_user)
+
+    if request.method == 'POST':
+        form = PasswordChangeForm(current_user, data=request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Password change successfully saved!')
+
+    return render(request, 'App_Login/change_password.html', context={"form" : form})
+

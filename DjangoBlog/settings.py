@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'App_Login',
     'App_Blog',
     'crispy_forms',
-    'crispy_bootstrap4',
+    'crispy_bootstrap4', 
 
 ]
 
@@ -127,8 +127,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
-STATICFILES_DIR = [STATIC_DIR,]
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [STATIC_DIR,]
+
+# The directory to which collectstatic will copy all the static files
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
